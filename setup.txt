@@ -1,0 +1,3 @@
+# Magic 8-Ball — copy to SD card as /setup/setup.txt
+BRIGHTNESS = 200
+TIMEOUT = 300
