@@ -1,3 +1,5 @@
+> Part of [**app-pixels.com**](https://www.app-pixels.com) — browse + flash this app at [`/apps/magic-8ball`](https://www.app-pixels.com/apps/magic-8ball).
+
 # magic-8ball
 
 **Magic 8 Ball** · v1.0.0
