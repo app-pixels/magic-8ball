@@ -256,7 +256,7 @@ static void readLanguageConfig() {
     SD_MMC.end();
 }
 
-void app_8ball_setup(Arduino_SH8601 *gfx) {
+void app_8ball_setup(Arduino_OLED *gfx) {
     (void)gfx;
     canvas = g_canvas;
     readLanguageConfig();

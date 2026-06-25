@@ -12,10 +12,11 @@
 #include "HWCDC.h"
 #include "XPowersLib.h"
 #include "app_common.h"
+#include "hw_panel.h"
 #include "app_8ball.h"
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(LCD_CS,LCD_SCLK,LCD_SDIO0,LCD_SDIO1,LCD_SDIO2,LCD_SDIO3);
-Arduino_SH8601 *gfx = new Arduino_SH8601(bus,GFX_NOT_DEFINED,0,LCD_WIDTH,LCD_HEIGHT);
+Arduino_OLED *gfx = nullptr;
 Arduino_Canvas *g_canvas = nullptr;
 XPowersPMU power;
 
@@ -31,6 +32,7 @@ void setup() {
     if(f){char line[160];while(f.available()){int len=f.readBytesUntil('\n',line,sizeof(line)-1);line[len]='\0';const char*p;
       if((p=strstr(line,"BRIGHTNESS"))){p+=10;while(*p==' '||*p=='=')p++;int v=atoi(p);if(v>0&&v<=255)g_config.brightness=(uint16_t)v;}
       if((p=strstr(line,"TIMEOUT"))){p+=7;while(*p==' '||*p=='=')p++;int v=atoi(p);if(v>=0)g_config.timeout_s=(uint32_t)v;}}f.close();}SD_MMC.end();}
+  gfx = make_display(bus);
   g_canvas = new Arduino_Canvas(LCD_WIDTH,LCD_HEIGHT,gfx,0,0,0);
   if(!g_canvas->begin()) USBSerial.println("canvas begin failed");
   gfx->setBrightness(g_config.brightness); app_8ball_setup(gfx);
